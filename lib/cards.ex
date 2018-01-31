@@ -4,18 +4,8 @@ defmodule Cards do
   """
 
   @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Cards.hello
-      :world
-
+    Return a list of strings representing a deck of playing cards
   """
-  def hello do
-    :world
-  end
-
   def create_deck do
     values = ["Ace", "Two", "Three", "Four", "Five"]
     suits = ["Spades", "Clubs", "Hearts", "Diamonds"]
@@ -29,10 +19,34 @@ defmodule Cards do
     Enum.shuffle(deck)
   end
 
+  @doc """
+    Determins whether a deck contains a given card
+
+  ## Examples
+
+      iex> deck = Cards.create_deck
+      iex> Cards.contains?(deck, "Three of Spades")
+      true
+      iex> Cards.contains?(deck, "Three")
+      false
+
+  """
   def contains?(deck, card) do
     Enum.member?(deck, card)
   end
 
+  @doc """
+    Devides a deck into a hand the remainder of the deck.
+    The `hand_size` argument indecates how many cards should be in the hand.
+
+  ## Examples
+
+      iex> deck = Cards.create_deck
+      iex> { hand, deck } = Cards.deal(deck, 2)
+      iex> hand
+      ["Ace of Spades", "Two of Spades"]
+
+  """
   def deal(deck, hand_size) do
     Enum.split(deck, hand_size)
   end
